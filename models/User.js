@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//create a new Schema instance and pass it to the mongoose model
 const UserSchema = new Schema({
   name: {
     type: String,

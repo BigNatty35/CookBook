@@ -18,6 +18,7 @@ mongoose
 app.use("/api/users", users);
 app.use("/api/events", events);
 
+//tells express to send a repsonse when get request is compete
 app.get('/', (req, res) => res.send("Hello Baby!"));
 app.get('/test', (req, res) => res.send("Hello BRO!"));
 
