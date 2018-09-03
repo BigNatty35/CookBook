@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 //create a new Schema instance and pass it to the mongoose model
 const UserSchema = new Schema({
+  // define what type of data will be in a user document
   name: {
     type: String,
     required: true
