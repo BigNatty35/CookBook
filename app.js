@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 
 // imported routes
 const users = require("./routes/api/users");
-const events = require("./routes/api/events");
+const entries = require("./routes/api/entries");
 const bodyParser = require('body-parser');
 
 // connect to MongoDB using mongoose
@@ -16,7 +16,7 @@ mongoose
 
 // tells express to use these new routes
 app.use("/api/users", users);
-app.use("/api/events", events);
+app.use("/api/entries", entries);
 
 //tells express to send a repsonse when get request is compete
 app.get('/', (req, res) => res.send("Hello Baby!"));
