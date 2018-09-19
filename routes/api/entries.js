@@ -1,7 +1,44 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-// tells express router to make a get request to the test route.
-// the response is a json object with a message.
-router.get("/test", (req, res) => res.json({ msg: "This is the entry route" }));
+const mongoose = require('mongoose');
+const passport = require('passport');
+
+const Entry = require('../../models/Entry');
+const validateEntryInput = require('../../validation/entries');
+
+router.get('/', (req, res) => {
+  Entry.find()
+    .sort({ date: -1 })
+    .then(entries => res.json(entries))
+    .catch(err => res.status(404).json({ noentryfound: 'No entries found' }));
+});
+
+router.get('/:id', (req, res) => {
+  Entry.findById(req.params.id)
+    .then(entry => res.json(entry))
+    .catch(err =>
+      res.status(404).json({ noentryfound: 'No entry found with that ID' })
+    );
+});
+
+router.post(
+  '/',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    const { errors, isValid } = validateEntryInput(req.body);
+
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
+
+    const newEntry = new Entry({
+      text: req.body.text,
+      name: req.body.name,
+      user: req.user.id
+    });
+
+    newEntry.save().then(entry => res.json(entry));
+  }
+);
 
 module.exports = router;
