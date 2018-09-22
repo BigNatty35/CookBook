@@ -33,7 +33,7 @@ router.post(
 
     const newEntry = new Entry({
       text: req.body.text,
-      name: req.body.name,
+      title: req.body.title,
       user: req.user.id
     });
 

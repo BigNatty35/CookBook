@@ -10,7 +10,7 @@ const EntrySchema = new Schema({
     type: String,
     required: true
   },
-  name: {
+  title: {
     type: String
   },
   date: {

@@ -124,7 +124,11 @@ require('../../config/passport')(passport);
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
+
 router.get('/test', (req, res) => res.json({ msg: 'Users route is working' }));
+
+
+// this is a post request route from the register page, to create a new user.
 router.post('/register', (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
 
@@ -136,7 +140,7 @@ router.post('/register', (req, res) => {
   User.findOne({ email: req.body.email })
     .then(user => {
       if (user) {
-        return res.status(400).json({ email: "A user has already registered with this address" })
+        return res.status(400).json({ email: "A user has already registered with this address" });
       } else {
 
         const newUser = new User({
@@ -155,10 +159,13 @@ router.post('/register', (req, res) => {
               .then(user => res.json(user))
               .catch(err => console.log(err));
           });
-        })
+        });
       }
-    })
-})
+    });
+});
+
+
+//this is the post request from the login, to find an existing user.
 router.post('/login', (req, res) => {
 
   const { errors, isValid } = validateLoginInput(req.body);
