@@ -11,7 +11,12 @@ const EntrySchema = new Schema({
     required: true
   },
   title: {
-    type: String
+    type: String,
+    // required: true
+  },
+  question: {
+    type: Schema.Types.ObjectId,
+    ref: 'questions'
   },
   date: {
     type: Date,
