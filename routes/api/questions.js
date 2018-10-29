@@ -5,9 +5,7 @@ const passport = require("passport");
 
 const Question = require('../../models/Question');
 
-// router.get('/', (req, res) => {
-//   res.json({msg: 'success'});
-// });
+
 
 router.get("/test", (req, res) => res.json({ msg: "questions route is working" }));
 
@@ -39,13 +37,6 @@ router.get("/:id", (req, res) => {
 
 
 
-router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {
 
-  const newQuestion = new Question({
-    title: req.body.title
-  });
-
-  newQuestion.save().then(question => res.json(question));
-});
 
 module.exports = router;
