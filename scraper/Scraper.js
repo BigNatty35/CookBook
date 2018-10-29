@@ -1,9 +1,7 @@
 // Grab all of the a-tags from inside of the big tags
-const Question = require('./models/Question');
-const mongoose = require("mongoose");
+const Question = require('../models/Question');
 const rp = require('request-promise');
 const $ = require('cheerio');
-const db = require("./config/keys").mongoURI;
 
 
 
@@ -32,7 +30,7 @@ getQuestions(
   
   questions = questions.map(question => {
     const newQuestion =  new Question({title: question});
-    console.log(newQuestion);
+    // console.log(newQuestion);
     question = newQuestion;
     question.save();
   });

@@ -29,6 +29,14 @@ router.get('/all', (req, res) => {
     .catch(err => res.status(404).json({ nopostsfound: 'No posts found' }));
 });
 
+router.get("/:id", (req, res) => {
+  Question.findById(req.params.id)
+    .then(entry => res.json(entry))
+    .catch(err =>
+      res.status(404).json({ noentryfound: "No entry found with that ID" })
+    );
+});
+
 
 
 router.post('/', passport.authenticate('jwt', {session: false}), (req, res) => {

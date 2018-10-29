@@ -3,9 +3,11 @@ const db = require("../config/keys").mongoURI;
 
 mongoose
 .connect(db);
+
 mongoose.connection.on('error', function () {
   console.error('MongoDB Connection Error. Make sure MongoDB is running.');
-})
+});
+
 const Schema = mongoose.Schema;
 
 const QuestionSchema = new Schema({
