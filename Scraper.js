@@ -13,17 +13,16 @@ const getQuestions = (url) => {
     .then(function(html) {
       //success!
       let arr = [];
-      // console.log($('li > a', html).length);
-      $('li > a', html).each(function(i, elem){
+      $('li > a', html).each(function(i, elem){ // grab all of the a-tags from the html
         if(i === 499) {
           return false;
         }
-       arr[i] = $(this).text();
+       arr[i] = $(this).text(); // push the text from a-tag into an array.
       });
       return arr; // returns an array of questions
     })
     .catch(function (err) {
-      //handle error
+      console.log(err);
     });
 };
 
@@ -42,7 +41,4 @@ getQuestions(
   console.log(err);
 });
 
-// console.log(questions);
-// questions.then(question => console.log(question));
-// questions.
 module.exports = getQuestions;
