@@ -16,7 +16,7 @@ router.get("/test", (req, res) => res.json({ msg: "questions route is working" }
 
 // router.get('/all', passport.authenticate('jwt', {session: false}), (req, res) => {
 //   Question.find()
-//     .then(questions => {
+//     .then(questions => {  
 //       res.json(questions);
 //     })
 //     .catch(err => res.status(404).json({noquestions: 'no questions were found'}));
