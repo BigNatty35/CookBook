@@ -4,12 +4,11 @@ import './index.css';
 import jwt_decode from 'jwt-decode';
 import * as APIUtil from './util/session_api_util';
 //Components
-import configureStore from './store/store';
+import store from './store/store';
 import Root from './components/root';
 import registerServiceWorker from './registerServiceWorker';
 
 document.addEventListener('DOMContentLoaded', () => {
-  let store = configureStore(); 
   // Check for token
   // if (localStorage.jwtToken) {
   //   // Set auth token header auth
