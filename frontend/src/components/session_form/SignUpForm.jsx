@@ -1,14 +1,16 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
-class SessionForm extends React.Component {
+class SignUpForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       name: '',
       email: '',
       password: '',
-      password2: ''
+      password2: '',
+      errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -22,7 +24,9 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    this.props.processForm(user);
+    axios.post('/api/users/register', user)
+      .then(res => console.log(res.data))
+      .catch(err => this.setState({errors: err.response.data}));
   }
 
   renderErrors() {
@@ -38,15 +42,13 @@ class SessionForm extends React.Component {
   }
 
   render() {
-      
-    return (
-      
+    const {errors} = this.state;
+
+    return ( 
       <div className="login-form-container">
         <form onSubmit={this.handleSubmit} className="login-form-box">
-          Welcome to BenchBnB!
+          Register Here!!
           <br />
-          Please {this.props.formType} or {this.props.navLink}
-          {/* {this.renderErrors()} */}
           <div className="login-form">
             <br />
             <label>Username:
@@ -55,6 +57,7 @@ class SessionForm extends React.Component {
                 onChange={this.update('name')}
                 className="login-input"
               />
+              {errors.name}
             </label>
             <br />
             <label>Email:
@@ -63,6 +66,7 @@ class SessionForm extends React.Component {
                 onChange={this.update('email')}
                 className="login-input"
               />
+              {errors.email}
             </label>
             <br />
             <label>Password:
@@ -71,16 +75,17 @@ class SessionForm extends React.Component {
                 onChange={this.update('password')}
                 className="login-input"
               />
+              {errors.password}
             </label>
-            <br/>
-            <label>Retype Password:
+            <label>Re-enter Password:
               <input type="password"
                 value={this.state.password2}
                 onChange={this.update('password2')}
                 className="login-input"
               />
+              {errors.password2}
             </label>
-            <br />
+            <br/>
             <input className="session-submit" type="submit" value={this.props.formType} />
           </div>
         </form>
@@ -89,4 +94,7 @@ class SessionForm extends React.Component {
   }
 }
 
-export default withRouter(SessionForm);
+
+
+
+export default withRouter(SignUpForm);
