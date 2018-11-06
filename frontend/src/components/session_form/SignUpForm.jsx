@@ -1,6 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
+import {registerUser} from '../../actions/authActions';
+import { connect } from 'react-redux';
 
 class SignUpForm extends React.Component {
   constructor(props) {
@@ -15,6 +17,14 @@ class SignUpForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+  }
+
+
   update(field) {
     return e => this.setState({
       [field]: e.currentTarget.value
@@ -24,9 +34,7 @@ class SignUpForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    axios.post('/api/users/register', user)
-      .then(res => console.log(res.data))
-      .catch(err => this.setState({errors: err.response.data}));
+    this.props.registerUser(user);
   }
 
   renderErrors() {
@@ -95,6 +103,21 @@ class SignUpForm extends React.Component {
 }
 
 
+// const msp = state => {
+//   return {
+//     auth: state.auth
+//   };
+// };
+
+// const mdp = dispatch => {
+//   return {
+//     registerUser: 
+//   }
+// }
+
+const mapStateToProps = state => ({
+  errors: state.errors
+});
 
 
-export default withRouter(SignUpForm);
+export default connect(mapStateToProps, {registerUser})(SignUpForm);

@@ -1,16 +1,16 @@
-import {
-  GET_ERRORS,
-  RECEIVE_CURRENT_USER
-} from '../util/session_api_util';
+import React from 'react';
+import { GET_ERRORS } from '../actions/types';
 
-export default (state = [], action) => {
-  Object.freeze(state);
+const initialState = {};
+
+export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ERRORS:
-      return action.payload;
-    case RECEIVE_CURRENT_USER:
-      return [];
+      return {
+        ...state,
+        errors: action.payload
+      }
     default:
       return state;
   }
-};
+}
