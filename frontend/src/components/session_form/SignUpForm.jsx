@@ -37,17 +37,6 @@ class SignUpForm extends React.Component {
     this.props.registerUser(user);
   }
 
-  renderErrors() {
-    return (
-      <ul>
-        {this.props.errors.map((error, i) => (
-          <li key={`error-${i}`}>
-            {error}
-          </li>
-        ))}
-      </ul>
-    );
-  }
 
   render() {
     const {errors} = this.state;
@@ -116,7 +105,7 @@ class SignUpForm extends React.Component {
 // }
 
 const mapStateToProps = state => ({
-  errors: state.errors
+  errors: state.errors.errors
 });
 
 
