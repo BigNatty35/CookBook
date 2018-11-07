@@ -37,6 +37,17 @@ router.get("/:id", (req, res) => {
 
 
 
+// grab 3 random questions
+router.get('/', (req, res) => {
+  Question.aggregate().sample(3)
+    .then(questions => res.json(questions))
+    .catch(err => {
+      res.status(404).json({noquestionsfound: "No Questions"});
+    });
+});
+
+
+
 
 
 module.exports = router;

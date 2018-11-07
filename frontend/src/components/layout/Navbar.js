@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {openModal, closeModal} from '../../actions/modalActions';
+import { Link } from 'react-router-dom';
 
 
 class Navbar extends React.Component {
@@ -17,7 +18,7 @@ class Navbar extends React.Component {
           <div className="navbox">
             <ul className="navbar-bar">
               <li>
-                <a href="">WriteAboutIt</a>
+                <Link to="/">WriteAboutIt</Link>
               </li>
             </ul>
   
