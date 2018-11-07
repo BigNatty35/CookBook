@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {openModal, closeModal} from '../../actions/modalActions';
+import {logoutUser} from '../../actions/authActions';
 import { Link } from 'react-router-dom';
 
 
@@ -10,7 +11,20 @@ class Navbar extends React.Component {
   }
 
   render() {
-    
+    const {isAuthenticated, user} = this.props.auth;
+
+    const guestLinks = (
+      <ul className="navbar-bar">
+        <li onClick={() => this.props.openModal('Sign In')}>Login</li>
+        <li onClick={() => this.props.openModal('Register')}>Sign Up</li>
+      </ul>
+    );
+
+    const loggedIn = (
+      <ul className="navbar-bar">
+        <li onClick={() => this.props.logoutUser()}>Logout</li>
+      </ul>
+    );
 
     return (
       <div className="navbar">
@@ -21,11 +35,7 @@ class Navbar extends React.Component {
                 <Link to="/">WriteAboutIt</Link>
               </li>
             </ul>
-  
-            <ul className="navbar-bar">
-              <li onClick={() => this.props.openModal('Sign In')}>Login</li>
-              <li onClick={() => this.props.openModal('Register')}>Sign Up</li>
-            </ul>
+            {isAuthenticated ? loggedIn : guestLinks}
           </div>
         </div>
       </div>
@@ -36,14 +46,11 @@ class Navbar extends React.Component {
 
 const msp = state => {
   return {
-    modal: state.ui
+    modal: state.ui,
+    auth: state.auth
   };
 };
 
-const mdp = dispatch => {
-  return {
-    openModal: (modal) => dispatch(openModal(modal))
-  };
-};
 
-export default connect(msp, mdp)(Navbar);
+
+export default connect(msp, {openModal, logoutUser})(Navbar);
