@@ -26,7 +26,7 @@ export const setCurrentUser = decoded => {
 
 
 export const loginUser = (userData, history) => dispatch => {
-  axios
+  return axios
     .post('/api/users/login', userData)
     .then(res => {
       //Save to localStorage
@@ -39,8 +39,6 @@ export const loginUser = (userData, history) => dispatch => {
       const decoded = jwt_decode(token);
       // Set current user
       dispatch(setCurrentUser(decoded));
-      history.push('/questions')
-      ;
     })
     .catch(err =>
       dispatch({

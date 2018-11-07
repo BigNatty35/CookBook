@@ -2,6 +2,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import {connect} from 'react-redux';
 import {loginUser} from '../../actions/authActions';
+import {closeModal} from '../../actions/modalActions';
 import axios from "axios";
 
 class LoginForm extends React.Component {
@@ -13,6 +14,15 @@ class LoginForm extends React.Component {
       errors: {}
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.errors) {
+      this.setState({ errors: nextProps.errors });
+    }
+    if(nextProps.auth.isAuthenticated) {
+      this.props.history.push('/questions');
+    }
   }
 
   update(field) {
@@ -71,4 +81,10 @@ class LoginForm extends React.Component {
   }
 }
 
-export default connect(null, {loginUser})(withRouter(LoginForm));
+
+const msp = state => ({
+  errors: state.errors.errors,
+  auth: state.auth
+});
+
+export default connect(msp, {loginUser, closeModal})(withRouter(LoginForm));

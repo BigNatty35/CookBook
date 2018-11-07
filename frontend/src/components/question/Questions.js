@@ -22,7 +22,6 @@ class Questions extends Component {
   render() {
     const arr = Array.from(this.state.questions);
     
-    console.log(arr);
     return (
       <div>
       <ul>
