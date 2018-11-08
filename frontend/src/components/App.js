@@ -6,6 +6,7 @@ import setAuthToken from '../utils/setAuthToken';
 import store from '../store/store';
 import Navbar from '../components/layout/Navbar';
 import Modal from '../components/modal/Modal';
+import EntryForm from '../components/entry/EntryForm';
 import Questions from '../components/question/Questions';
 import '../App.css';
 
@@ -28,6 +29,7 @@ class App extends Component {
         <Navbar />
         <Modal />
         <Route exact path="/questions" component={Questions}/>
+        <Route exact path="/entry" component={EntryForm}/>
       </div>
       </Router>
     );

@@ -49,11 +49,12 @@ export const loginUser = (userData, history) => dispatch => {
 };
 
 // Logout user
-export const logoutUser = () => dispatch => {
+export const logoutUser = (history) => dispatch => {
   // remove token from local storage
   localStorage.removeItem('jwtToken');
   // remove token auth headers
   setAuthToken(false);
   // set current user to an empty object
   dispatch(setCurrentUser({}));
+  history.push('/');
 };

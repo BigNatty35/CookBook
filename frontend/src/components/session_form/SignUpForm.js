@@ -101,17 +101,7 @@ class SignUpForm extends React.Component {
   }
 }
 
-// const msp = state => {
-//   return {
-//     auth: state.auth
-//   };
-// };
 
-// const mdp = dispatch => {
-//   return {
-//     registerUser:
-//   }
-// }
 
 const mapStateToProps = state => ({
   errors: state.errors.errors

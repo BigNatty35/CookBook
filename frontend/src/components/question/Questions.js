@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {getQuestions} from '../../actions/questionActions';
 import QuestionItems from './QuestionItems';
+import EntryForm from '../../components/entry/EntryForm';
+import {closeModal} from '../../actions/modalActions';
 
 class Questions extends Component {
   constructor(props) {
@@ -17,6 +19,8 @@ class Questions extends Component {
     this.props.getQuestions().then(() => {
       this.setState({questions: this.props.questions});
     });
+
+    this.props.closeModal();
   }
 
   render() {
@@ -29,6 +33,7 @@ class Questions extends Component {
          {arr.map(el => <QuestionItems question={el} key={el.id}/>)}
         </li>
       </ul>
+      <EntryForm/>
       </div>
     );
   }
@@ -45,4 +50,4 @@ const mapStateToProps = state => ({
 
 
 
-export default connect(mapStateToProps, {getQuestions})(Questions);
+export default connect(mapStateToProps, {getQuestions, closeModal})(Questions);

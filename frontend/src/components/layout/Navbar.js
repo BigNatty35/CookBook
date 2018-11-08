@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {openModal, closeModal} from '../../actions/modalActions';
 import {logoutUser} from '../../actions/authActions';
 import { Link } from 'react-router-dom';
-
+import { withRouter } from "react-router-dom";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -22,7 +22,7 @@ class Navbar extends React.Component {
 
     const loggedIn = (
       <ul className="navbar-bar">
-        <li onClick={() => this.props.logoutUser()}>Logout</li>
+        <li onClick={() => this.props.logoutUser(this.props.history)}>Logout</li>
       </ul>
     );
 
@@ -53,4 +53,4 @@ const msp = state => {
 
 
 
-export default connect(msp, {openModal, logoutUser})(Navbar);
+export default connect(msp, {openModal, logoutUser})(withRouter(Navbar));
