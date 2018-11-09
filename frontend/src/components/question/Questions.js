@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {getQuestions} from '../../actions/questionActions';
+import {getQuestions, setCurrentQuestion} from '../../actions/questionActions';
 import QuestionItems from './QuestionItems';
-import EntryForm from '../../components/entry/EntryForm';
 import {closeModal} from '../../actions/modalActions';
 
 class Questions extends Component {
@@ -16,24 +15,24 @@ class Questions extends Component {
   
 
   componentDidMount() {
-    this.props.getQuestions().then(() => {
-      this.setState({questions: this.props.questions});
-    });
-
+    const questions = this.props.questions;
+    if(!questions) {
+      this.props.getQuestions().then(() => {
+        this.setState({questions: this.props.questions});
+      });
+    } else {
+      this.setState({ questions: this.props.questions });
+    }
     this.props.closeModal();
   }
 
   render() {
     const arr = Array.from(this.state.questions);
-    
     return (
       <div>
-      <ul>
-        <li>
-         {arr.map(el => <QuestionItems question={el} key={el.id}/>)}
-        </li>
-      </ul>
-      <EntryForm/>
+        <ul>
+          {arr.map(el => <QuestionItems setQuestion={this.props.setCurrentQuestion} question={el} key={el._id}/>)}
+        </ul>
       </div>
     );
   }
@@ -50,4 +49,6 @@ const mapStateToProps = state => ({
 
 
 
-export default connect(mapStateToProps, {getQuestions, closeModal})(Questions);
+export default connect(mapStateToProps, 
+  {getQuestions, closeModal, setCurrentQuestion}
+)(Questions);

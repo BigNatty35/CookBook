@@ -1,6 +1,8 @@
-import { GET_QUESTIONS } from "../actions/types";
+import { GET_QUESTIONS,CURRENT_QUESTION } from "../actions/types";
 
-const initialState = {};
+const initialState = {
+  currentQuestion: null
+};
 
 export default function questionsReducer(state = initialState, action) {
   switch (action.type) {
@@ -9,6 +11,12 @@ export default function questionsReducer(state = initialState, action) {
         ...state,
         questions: action.payload
       };
+    case CURRENT_QUESTION: {
+      return {
+        ...state,
+        currentQuestion: action.payload
+      }
+    }
     default:
       return state;
   }

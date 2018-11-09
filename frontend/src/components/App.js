@@ -29,7 +29,7 @@ class App extends Component {
         <Navbar />
         <Modal />
         <Route exact path="/questions" component={Questions}/>
-        <Route exact path="/entry" component={EntryForm}/>
+        <Route exact path="/entry/:question_id" component={EntryForm}/>
       </div>
       </Router>
     );

@@ -1,4 +1,9 @@
-import { GET_QUESTIONS, GET_ERRORS } from "../actions/types";
+import { 
+  GET_QUESTIONS, 
+  GET_ERRORS , 
+  CURRENT_QUESTION
+} from "../actions/types";
+
 import axios from "axios";
 
 export const getQuestions = () => dispatch => {
@@ -19,4 +24,12 @@ export const getQuestions = () => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+
+export const setCurrentQuestion = (question) => {
+  return {
+    type: CURRENT_QUESTION,
+    payload: question
+  };
 };
