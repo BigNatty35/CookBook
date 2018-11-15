@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import jwt_decode from 'jwt-decode';
 //Components
 import store from './store/store';
 import Root from './components/root';

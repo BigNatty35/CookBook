@@ -1,4 +1,3 @@
-import React from 'react';
 import isEmpty from '../validations/is_empty'
 import {
   SET_CURRENT_USER

@@ -22,10 +22,11 @@ class EntryForm extends Component {
     this.props.history.push('/questions');
   }
   render() {
+    const questionName = JSON.parse(sessionStorage.getItem('current')); // get object from session Storage
     return (
       <div>
         <button onClick={this.backButton}>Back to Questions</button>
-        <h1>{this.props.currentQuestion.title}</h1>
+        <h1>{questionName.title}</h1>
         <form action="">
           <label htmlFor="">
             Answer the question!

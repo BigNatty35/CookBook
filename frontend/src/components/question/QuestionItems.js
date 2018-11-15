@@ -5,8 +5,14 @@ export default function QuestionItems({question, setQuestion}) {
   return (
     <div>
       <li>
-        <Link to={`/entry/${question._id}`}><h1 onClick={() => setQuestion(question)}>{question.title}</h1></Link>
+        <Link to={`/entry/${question._id}`}><h1 onClick={() => setInStorage(question)}>{question.title}</h1></Link>
       </li>
     </div>
   );
+}
+
+
+
+function setInStorage(question) {
+  sessionStorage.setItem('current', JSON.stringify(question));
 }
